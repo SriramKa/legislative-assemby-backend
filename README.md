@@ -6,4 +6,4 @@ Built using Express.js and MongoDB.
 A user can create an account as an MLA, declaring themslves as a part of a party. An MLA can present bills before the Assempbly and put them up to vote. MLAs can subscribe to mailing lists for bills they want, and they will be sent a mail when the bill is put to vote. Voting of a bill is also done via mail sent to these recipients.
 
 #### Usage
-Refer [here](docs/url-breakdown) for the URL structure.
+Refer [here](./docs/url-breakdown.md) for the URL structure.
