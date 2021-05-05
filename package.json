@@ -1,0 +1,40 @@
+{
+  "name": "regex-taskphase-ideation",
+  "version": "1.0.0",
+  "description": "This project aims to build a highly modular, highly isolatable, highly decoupled and functionally robust HTTP REST API with service acceptance for GET and POST requests only.",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/SriramKa/regex-taskphase-ideation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/SriramKa/regex-taskphase-ideation/issues"
+  },
+  "homepage": "https://gitlab.com/SriramKa/regex-taskphase-ideation#readme",
+  "dependencies": {
+    "async": "^3.2.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "mailgun-js": "^0.22.0",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.7",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}
