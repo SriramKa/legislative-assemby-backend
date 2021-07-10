@@ -12,6 +12,7 @@ router.use(bodyparser.json());
 
 router.post('/', auth.check, (req, res, next) => {
 	let user = req.user; //stores logged in user's doc
+	var fullUrl = req.protocol + '://' + req.get('host');
 
 	Bill.findOne({no: parseInt(req.query.bill)})
 	.populate('party', 'name')
@@ -44,12 +45,12 @@ router.post('/', auth.check, (req, res, next) => {
 				let body =
 				`<p>Bill description: ${bill.description}</p>
 				<p>
-					<form method="post"action="http://localhost:3000/user/poll?bill=${bill.no}&vote=true" class="inline">
+					<form method="post"action="${fullUrl}/user/poll?bill=${bill.no}&vote=true" class="inline">
 						<input type="hidden">
 							<button>Vote FOR</button>
 						</input>
 					</form>
-					<form method="post" action="http://localhost:3000/user/poll?bill=${bill.no}&vote=false" class="inline">
+					<form method="post" action="${fullUrl}/user/poll?bill=${bill.no}&vote=false" class="inline">
 						<input type="hidden">
 							<button>Vote AGAINST</button>
 						</input>
