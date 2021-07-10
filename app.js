@@ -11,25 +11,7 @@ require("dotenv").config({ path: path.resolve(__dirname, "./configs/.env") });
 
 const port = process.env.PORT || 3000;
 
-//connecting to the database
-mongoose
-	.connect(process.env.DBURL, {
-		//to avoid deprecation warnings:
-		useCreateIndex: true,
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-	})
-	.then(
-		(db) => {
-			console.log("Connected to db, good job");
-		},
-		(err) => {
-			console.log("Error in connecting to the db: \n", err);
-			app.listen(port, () => console.log("Server walkn't at", port));
-		}
-	);
-
+//setting up express
 const app = express();
 app.use(bodyparser.json());
 app.use(morgan("dev"));
@@ -64,3 +46,20 @@ app.use("/evalpoll", evalpoll);
 
 //for all undefined routes:
 app.use((req, res, next) => res.status(404).end("Route not found."));
+
+//connecting to the database
+mongoose
+	.connect(process.env.DBURL, {
+		//to avoid deprecation warnings:
+		useCreateIndex: true,
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+	})
+	.then((db) => {
+		console.log("Connected to db, good job");
+		app.listen(port, () => console.log("Server walkn't at", port));
+	})
+	.catch((err) => {
+		console.log("Error in connecting to the db: \n", err);
+	});
