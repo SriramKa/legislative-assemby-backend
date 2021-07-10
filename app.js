@@ -3,17 +3,16 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyparser = require("body-parser");
 const morgan = require("morgan");
-const path = require("path");
 const session = require("express-session");
-const expressLayouts = require("express-ejs-layouts");
 const auth = require("./configs/authenticate");
-require("dotenv").config({ path: path.resolve(__dirname, "./configs/.env") });
+require("dotenv").config();
 
 const port = process.env.PORT || 3000;
 
 //setting up express
 const app = express();
-app.use(bodyparser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
 	session({
@@ -22,8 +21,6 @@ app.use(
 		saveUninitialized: true,
 	})
 );
-app.use(expressLayouts);
-app.set("view engine", "ejs");
 app.use(passport.initialize());
 app.use(passport.session());
 auth.setup(passport);
