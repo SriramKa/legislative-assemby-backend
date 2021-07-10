@@ -1,4 +1,4 @@
-# Sketching the URL structure
+# URL Structure
 
 ! prefixed URLs only accessible by authorised users.\
 !! prefixed URLs give restricted access.
@@ -12,8 +12,6 @@
 - ```page``` takes integer value, to determine page number for pagination
 - ```size``` takes integer value, to determines items per page for pagination.
 - ```party``` takes in string value, to return the MLAs of the passed party.
-
-**Q:** Would it be better to have an array of party members in each party object so not every MLA will be queried? **Update:** This has been implemented.
 
 ```GET /bills``` returns a list of Bills ever put forth in the Assembly or yet to be put forth, but doesn't list the ```supporting```, ```subscribers``` and ```presenter``` fields, because that makes sense in a political context.
 
@@ -37,8 +35,6 @@
 
 ```POST /auth/register``` takes user details JSON, applies registration logic and redirects to ```/auth``` to login with these new details.
 
-**Q:** Would it even make sense to have ```/register``` to be a sub-handle from ```/auth```, although it makes semantic sense to have all authorisation under one common URL?
-
 ```!GET /auth/logout``` removes the authorization of a logged in user and redirects to ```/```
 
 ```!GET /user``` displays logged-in user's details.
@@ -51,7 +47,7 @@
 ###### Arguments:
 - ```to-change``` takes string value, containing the fields to be changed, separated by '+'. This request takes in a JSON object with all the new values of the fields to be changed, and also the password for verification of the user.
 
-**Note:** User is verified via a csrf-token or validation cookie.
+**Note:** User is verified via a validation cookie.
 
 ```!POST /user/change/pass```
 
@@ -59,7 +55,7 @@
 - ```oldpwd``` takes string(encr) value, and is checked first and then only any changes are made to the details.
 - ```newpwd``` takes string(encr) value, represents the new password being passed.
 
-**Note:** User is verified via a csrf-token or validation cookie.
+**Note:** User is verified via a validation cookie.
 
 ---
 
@@ -86,10 +82,6 @@ Presenting party is automatically added as a supporting party, and members of su
 ###### Arguments:
 - ```bill``` takes integer value, corresponds to bill_no in poll.
 - ```vote``` takes boolean value, counts if voted true or false.
-
-**Q:** How will authentication work in this case, since if it's a direct click from the mail application, the user won't be logged in to this portal.
-
-**Note:** might have to modify data model again, because I'm realising that I'm storing the votes itself in no explicit place. (might convert ```subscribers``` to an array of objects where each object contains subscriber MLA Unique ID, and booleans ```voted``` and ```vote```). **Update:** these changes have been made.
 
 ```!POST user/subscribebill``` subscribe a user to a bill.
 
